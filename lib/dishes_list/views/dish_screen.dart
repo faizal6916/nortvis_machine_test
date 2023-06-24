@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nortvis/dishes_list/models/dishes_model.dart';
@@ -167,11 +168,15 @@ class _DishesScreenState extends State<DishesScreen> {
                                                     fontWeight:
                                                         FontWeight.w700),
                                               ),
-                                              SizedBox(height: 5.h,),
+                                              SizedBox(
+                                                height: 5.h,
+                                              ),
                                               SizedBox(
                                                   width: 1.sw,
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
                                                       Text(
                                                           '${dishModel.tableMenuList[_currentIndex].categoryDishes[ind].dishCurrency.name} ${dishModel.tableMenuList[_currentIndex].categoryDishes[ind].dishPrice}',
@@ -181,7 +186,10 @@ class _DishesScreenState extends State<DishesScreen> {
                                                                   FontWeight
                                                                       .w700)),
                                                       Padding(
-                                                        padding: const EdgeInsets.only(right: 20),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 20),
                                                         child: Text(
                                                             '${dishModel.tableMenuList[_currentIndex].categoryDishes[ind].dishCalories} Calories',
                                                             style: TextStyle(
@@ -190,7 +198,6 @@ class _DishesScreenState extends State<DishesScreen> {
                                                                     FontWeight
                                                                         .w700)),
                                                       ),
-                                                                    
                                                     ],
                                                   )),
                                               SizedBox(
@@ -235,11 +242,28 @@ class _DishesScreenState extends State<DishesScreen> {
                                         SizedBox(
                                           width: 60,
                                           height: 60,
-                                          
-                                          child: Image.network(dishModel
-                                              .tableMenuList[_currentIndex]
-                                              .categoryDishes[ind]
-                                              .dishImage),
+                                          child: CachedNetworkImage(
+                                            placeholder: (context, url) =>
+                                                Image(
+                                              image: AssetImage(
+                                                  'assets/nopreview.png'),
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) => Image(
+                                              image: AssetImage(
+                                                  'assets/nopreview.png'),
+                                            ),
+                                            imageUrl: dishModel
+                                                .tableMenuList[_currentIndex]
+                                                .categoryDishes[ind]
+                                                .dishImage,
+                                          ),
+                                          // child: Image.network(
+                                          // dishModel
+                                          //     .tableMenuList[_currentIndex]
+                                          //     .categoryDishes[ind]
+                                          //     .dishImage
+                                          // ),
                                         )
                                       ],
                                     )
